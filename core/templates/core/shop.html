@@ -5,9 +5,9 @@
     <div class="filters w-full lg:w-1/4">
         <h3 class="mb-3 text-xl uppercase">Search</h3>
 
-        <form>
+        <form method="get" action=".">
             <div class="flex">
-                <input type="text" class="p-4 bg-gray-100 border-0" placeholder="Search...">
+                <input type="text" name="query" class="p-4 bg-gray-100 border-0" placeholder="Search...">
 
                 <button class="p-4 bg-gray-100 border-0">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -20,13 +20,15 @@
         <h3 class="mt-6 mb-3 text-xl uppercase">Categories</h3>
 
         <ul class="space-y-2">
-            <li><a href="#" class="text-purple-500">All categories</a></li>
-            <li><a href="#" class="text-gray-500">類別一</a></li>
-            <li><a href="#" class="text-gray-500">類別二</a></li>
+            <li><a href="{% url 'shop' %}" class="{% if not active_category %}text-purple-500{% else %}text-gray-500{% endif %}">All categories</a></li>
+
+            {% for category in categories %}
+                <li><a href="{% url 'shop' %}?category={{ category.slug }}" class="{% if category.slug == active_category %}text-purple-500{% else %}text-gray-500{% endif %}">{{ category.name }}</a></li>
+            {% endfor %}
         </ul>
     </div>
 
-    <div class="products w-full lg:w-3/4 -mt-4  flex items-center flex-wrap">
+    <div class="products w-full lg:w-3/4 -mt-4 flex items-center flex-wrap">
         {% for product in products %}
             <div class="w-full md:w-1/3 xl:w-1/4 p-6">
                 <a href="#">
