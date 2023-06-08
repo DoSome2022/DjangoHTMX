@@ -16,6 +16,10 @@
                     <ul class="flex items-center space-x-4">
                         <li><a href="{% url 'shop' %}">商店</a></li>
                         <li><a href="#">關於</a></li>
+
+                        {% if request.user.is_authenticated %}
+                        <li><a href="{% url 'logout' %}">Log out</a></li>
+                        {% endif %}
                     </ul>
                 </div>
 
@@ -39,6 +43,8 @@
                     <h2 class="mb-5 uppercase text-lg">關於我們</h2>
 
                     <p class="text-gray-700">是但</p>
+
+                    
                 </div>
 
                 <div class="footer-right">
