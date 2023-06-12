@@ -3,6 +3,7 @@ from django.db.models import Q
 from product.models import Product, Category
 from django.contrib.auth import login
 from .forms import SignUpForm
+from django.contrib.auth.decorators import login_required
 # Create your views here.
 
 def frontpage(request):
@@ -27,6 +28,21 @@ def signup(request):
 
 def login_old(request):
     return render(request, 'core/login.html')
+
+@login_required
+def myaccount(request):
+    return render(request, 'core/myaccount.html')
+
+@login_required
+def edit_myaccount(request):
+    if request.method == 'POST':
+        user = request.user
+        user.email = request.POST.get('email')
+        user.username = request.POST.get('username')
+        user.save()
+
+        return redirect('myaccount')
+    return render(request, 'core/edit_myaccount.html')
 
 
 def shop(request):
