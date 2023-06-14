@@ -34,6 +34,9 @@ LOGIN_URL = '/login/'
 SESSION_COOKIE_AGE = 86400
 CART_SESSION_ID = 'cart'
 
+STRIPE_API_KEY_PUBLISHABLE = ''
+STRIPE_API_KEY_HIDDEN = ''
+
 # Application definition
 
 INSTALLED_APPS = [
