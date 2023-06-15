@@ -14,7 +14,16 @@ def add_to_cart(request, product_id):
 def cart(request):
     return render(request, 'cart/cart.html')
 
+def success(request):
+    return render(request, 'cart/success.html')
+
+
+
 def update_cart(request, product_id, action):
+    return response
+
+@login_required
+def checkout(request):
     cart = Cart(request)
 
     if action == 'increment':

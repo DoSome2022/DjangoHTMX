@@ -38,8 +38,8 @@ def start_order(request):
         payment_method_types=['card'],
         line_items=items,
         mode='payment',
-        success_url='http://127.0.0.1:8000/cart/success/',
-        cancel_url='http://127.0.0.1:8000/cart/'
+        success_url='http://127.0.0.1:8001/cart/success/',
+        cancel_url='http://127.0.0.1:8001/cart/'
     )
     payment_intent = session.payment_intent
 
@@ -63,5 +63,7 @@ def start_order(request):
             price = product.price * quantity
 
             item = OrderItem.objects.create(order=order, product=product, price=price, quantity=quantity)
+
+    cart.clear()
 
     return JsonResponse({'session': session, 'order': payment_intent})
