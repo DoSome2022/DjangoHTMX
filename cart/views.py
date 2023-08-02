@@ -20,10 +20,6 @@ def success(request):
 
 
 def update_cart(request, product_id, action):
-    return response
-
-@login_required
-def checkout(request):
     cart = Cart(request)
 
     if action == 'increment':
@@ -43,6 +39,7 @@ def checkout(request):
                 'name': product.name,
                 'image': product.image,
                 'get_thumbnail': product.get_thumbnail(),
+                'slug': product.slug,
                 'price': product.price,
             },
             'total_price': (quantity * product.price) / 100,
